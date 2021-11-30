@@ -14,31 +14,42 @@ function App() {
     setAgenda(agenda.concat(randomContact));
     // setAgenda([...agenda, randomContact]);
   };
+  const deleteContact = () => {
+    const deleteContact = agenda.splice(agenda.id);
+    // const deleteContact = deleteContact[deleteIndex] // It will also return a delete contact, but won't modify the original array.
+    setAgenda(agenda.concat(deleteContact));
+    // setAgenda([...agenda, deleteContact]);
+    console.log(deleteContact);
+  };
 
   const sortByName = () => {
-    const sortedArrName = agenda.sort((a, b) => {
-      if (a.name > b.name) {
-        return 1;
-      }
-      if (a.name < b.name) {
-        return -1;
-      }
-      return 0;
-    }).slice();
+    const sortedArrName = agenda
+      .sort((a, b) => {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      })
+      .slice();
     setAgenda(sortedArrName);
     console.log("sortedArrName", sortedArrName);
   };
 
   const sortByPopularity = () => {
-    const sortedArrPopu = agenda.sort((a, b) => {
-      if (a.popularity > b.popularity) {
-        return -1;
-      }
-      if (a.popularity < b.popularity) {
-        return 1;
-      }
-      return 0;
-    }).slice();
+    const sortedArrPopu = agenda
+      .sort((a, b) => {
+        if (a.popularity > b.popularity) {
+          return -1;
+        }
+        if (a.popularity < b.popularity) {
+          return 1;
+        }
+        return 0;
+      })
+      .slice();
     setAgenda(sortedArrPopu);
     console.log("sortedArrPopu", sortedArrPopu);
   };
@@ -59,6 +70,7 @@ function App() {
               <th>Popularity</th>
               <th>Oscar Winner?</th>
               <th>Emmy Winner?</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -77,6 +89,9 @@ function App() {
                   <td>{contacts.popularity.toFixed(2)}</td>
                   <td>{contacts.wonOscar ? "🏆" : "X"}</td>
                   <td>{contacts.wonEmmy && "🏆"}</td>
+                  <td>
+                    <button onClick={deleteContact}>Delete</button>
+                  </td>
                 </tr>
               );
             })}
