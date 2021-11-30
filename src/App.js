@@ -15,9 +15,10 @@ function App() {
     // setAgenda([...agenda, randomContact]);
   };
   const deleteContact = () => {
-    const deleteContact = agenda.splice(agenda.id);
+    const deleteContact = [...agenda];
+    deleteContact.splice(agenda.id, 1).slice();
     // const deleteContact = deleteContact[deleteIndex] // It will also return a delete contact, but won't modify the original array.
-    setAgenda(agenda.concat(deleteContact));
+    setAgenda(deleteContact);
     // setAgenda([...agenda, deleteContact]);
     console.log(deleteContact);
   };
