@@ -14,13 +14,13 @@ function App() {
     setAgenda(agenda.concat(randomContact));
     // setAgenda([...agenda, randomContact]);
   };
-  const deleteContact = () => {
-    const deleteContact = [...agenda];
-    deleteContact.splice(agenda.id, 1).slice();
-    // const deleteContact = deleteContact[deleteIndex] // It will also return a delete contact, but won't modify the original array.
-    setAgenda(deleteContact);
-    // setAgenda([...agenda, deleteContact]);
-    console.log(deleteContact);
+  const deleteContact = (contactId) => {
+    // const deleteActor = [...agenda];
+    // deleteActor.splice(agenda.id, 1).slice();
+    // setAgenda(deleteActor);
+    // console.log(deleteActor);
+    const filteredAgenda = agenda.filter((contact) => contact.id !== contactId);
+    setAgenda(filteredAgenda);
   };
 
   const sortByName = () => {
@@ -91,7 +91,7 @@ function App() {
                   <td>{contacts.wonOscar ? "🏆" : "X"}</td>
                   <td>{contacts.wonEmmy && "🏆"}</td>
                   <td>
-                    <button onClick={deleteContact}>Delete</button>
+                    <button onClick={deleteContact(contacts.id)}>Delete</button>
                   </td>
                 </tr>
               );
